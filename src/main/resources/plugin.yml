@@ -1,0 +1,11 @@
+name: tonii-economy
+version: '1.0-SNAPSHOT'
+main: io.github.toniidev.ToniiEconomy.ToniiEconomy
+api-version: '1.21'
+commands:
+  economygui:
+    usage: /<command>
+    description: Opens a GUI that admins can use to get custom plugins items
+  getinput:
+    usage: /<command>
+    description: test
