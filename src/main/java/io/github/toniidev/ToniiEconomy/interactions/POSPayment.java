@@ -27,11 +27,12 @@ public class POSPayment {
     private final Plugin plugin;
     private final Player owner;
     private final Player payer;
-    private final double amount;
     private final String date;
 
     private CVVStatus payerCVVStatus = CVVStatus.ABSENT;
     private PaymentStatus ownerPaymentStatus = PaymentStatus.WAITING;
+
+    private double amount;
 
     /**
      * A POSPayment instance
@@ -60,7 +61,7 @@ public class POSPayment {
         owner.openInventory(getOwnerGUIFactory().getInventory());
     }
 
-    private InventoryFactory getOwnerGUIFactory(){
+    public InventoryFactory getOwnerGUIFactory(){
         return new InventoryFactory("Pagamento POS", 1, plugin)
                 .setItem(0, new ItemStackFactory(ItemUtils.getPlayerSkull(payer))
                         .setName("§6Cliente")
@@ -97,7 +98,7 @@ public class POSPayment {
                 .fillWithGlass(GlassType.WHITE);
     }
 
-    private InventoryFactory getPayerGUIFactory(){
+    public InventoryFactory getPayerGUIFactory(){
         return new InventoryFactory("Pagamento POS", 1, plugin)
                 .setItem(0, new ItemStackFactory(payer.getInventory().getItemInMainHand())
                         .setName("§6Carta inserita")
@@ -142,7 +143,7 @@ public class POSPayment {
                         .addLoreLine("Importo: §f" + amount + "€")
                         .addLoreLine("Quando: " + date)
                         .get())
-                .setItem(8, new ItemStackFactory(new ItemStack(Material.RED_STAINED_GLASS_PANE))
+                .setItem(8, new ItemStackFactory(new ItemStack(Material.GREEN_STAINED_GLASS_PANE))
                         .setName("§aConferma")
                         .addLoreLine("Questo pagamento verrà confermato.")
                         .get())
@@ -181,5 +182,21 @@ public class POSPayment {
                 .disableClicks()
                 .disableClose()
                 .fillWithGlass(GlassType.WHITE);
+    }
+
+    public double getAmount() {
+        return amount;
+    }
+
+    public void setAmount(double value){
+        this.amount = value;
+    }
+
+    public Player getOwner() {
+        return owner;
+    }
+
+    public Player getPayer() {
+        return payer;
     }
 }
